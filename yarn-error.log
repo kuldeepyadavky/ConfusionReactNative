@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add react-safe-view
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add react-native-eements
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/react-safe-view: Not found
+  Error: https://registry.yarnpkg.com/react-native-eements: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:314:20)
@@ -47,9 +47,9 @@ npm manifest:
       "react-dom": "~16.11.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
       "react-native-elements": "^1.0.0-beta8",
-      "react-native-gesture-handler": "~1.6.0",
-      "react-native-reanimated": "~1.9.0",
-      "react-native-safe-area-context": "~3.0.7",
+      "react-native-gesture-handler": "1.6.0",
+      "react-native-reanimated": "1.9.0",
+      "react-native-safe-area-context": "3.0.7",
       "react-native-screens": "^2.9.0",
       "react-native-vector-icons": "^7.0.0",
       "react-native-web": "~0.11.7",
@@ -4701,10 +4701,10 @@ Lockfile:
       react-native-ratings "^6.3.0"
       react-native-status-bar-height "^2.2.0"
   
-  react-native-gesture-handler@~1.6.0:
-    version "1.6.1"
-    resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.1.tgz#678e2dce250ed66e93af409759be22cd6375dd17"
-    integrity sha512-gQgIKhDiYf754yzhhliagLuLupvGb6ZyBdzYzr7aus3Fyi87TLOw63ers+r4kGw0h26oAWTAdHd34JnF4NeL6Q==
+  react-native-gesture-handler@1.6.0:
+    version "1.6.0"
+    resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.0.tgz#e9a4e1d0c7ac21eb0d6b6ec013e73f9c0c33a629"
+    integrity sha512-KulGCWKTxa6xBpPP4LWEPmmLqBqOe2jbtdlILOVF/dR4EgImiaBVrKdOHeRMyMzJOYAWxs5uDZsyA8hgSsm+lw==
     dependencies:
       "@egjs/hammerjs" "^2.0.17"
       hoist-non-react-statics "^2.3.1"
@@ -4724,14 +4724,14 @@ Lockfile:
       lodash "^4.17.4"
       prop-types "^15.5.10"
   
-  react-native-reanimated@~1.9.0:
+  react-native-reanimated@1.9.0:
     version "1.9.0"
     resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.9.0.tgz#38676c99dd585504fdc7331efb45e5f48ec7339a"
     integrity sha512-Aj+spgIHRiVv7ezGADxnSH1EoKrQRD2+XaSiGY0MiB/pvRNNrZPSJ+3NVpvLwWf9lZMOP7dwqqyJIzoZgBDt8w==
     dependencies:
       fbjs "^1.0.0"
   
-  react-native-safe-area-context@~3.0.7:
+  react-native-safe-area-context@3.0.7, react-native-safe-area-context@~3.0.7:
     version "3.0.7"
     resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.0.7.tgz#0f53de7a30d626d82936000f3f6db374ecc4b800"
     integrity sha512-dqhRTlIFe5+P1yxitj0C9XVUxLqOmjomeqzUSSY8sNOWVjtIhEY/fl4ZKYpAVnktd8dt3zl13XmJTmRmy3d0uA==
