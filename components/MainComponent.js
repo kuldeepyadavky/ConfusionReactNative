@@ -19,6 +19,7 @@ function MenuNavigatorScreen() {
         headerStyle: {
           backgroundColor: "#512DA8",
         },
+        navigationOptions: ({ navigation })
         headerTintColor: "#fff",
         headerTitleStyle: {
           color: "#fff",
