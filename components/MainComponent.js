@@ -12,6 +12,7 @@ import Dishdetail from './DishdetailComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 
 
 
@@ -131,6 +132,18 @@ function HomeNavigatorScreen() {
 
 const ContactNavigator = createStackNavigator();
 
+const MenuIcon = (props) => {
+    return(
+        <Icon 
+            name='menu' 
+            size={24}
+            color='white'
+            onPress={() =>
+                props.navigation.toggleDrawer()}
+        />
+    );
+}
+
 function ContactNavigatorScreen(){
     return(
         <ContactNavigator.Navigator
@@ -159,6 +172,37 @@ function ContactNavigatorScreen(){
     );
 }
 
+const FavoritesNavigator = createStackNavigator();
+
+function FavoritesNavigatorScreen(){
+    return(
+        <FavoritesNavigator.Navigator
+            initialRouteName='Favorites'
+            screenOptions={HeaderOptions}
+        >
+            <FavoritesNavigator.Screen
+                name="Favorites"
+                component={Favorites}
+                options={
+                    ({navigation}) => ({
+                        headerLeft: () => (
+                            <Icon 
+                                name='menu' 
+                                size={24}
+                                color='white'
+                                onPress={() => 
+                                    navigation.toggleDrawer()}
+                            />
+                        )
+                    
+                    })
+                 }
+            />
+        </FavoritesNavigator.Navigator>
+    );
+}
+
+
 const ReservationNavigator = createStackNavigator();
 
 function ReservationNavigatorScreen(){
@@ -167,7 +211,7 @@ function ReservationNavigatorScreen(){
             initialRouteName='Reservation'
             screenOptions={HeaderOptions}
         >
-            <ContactNavigator.Screen
+            <ReservationNavigator.Screen
                 name="Reservation"
                 component={Reservation}
                 options={
@@ -189,19 +233,10 @@ function ReservationNavigatorScreen(){
     );
 }
 
-const AboutUsNavigator = createStackNavigator();
 
-const MenuIcon = (props) => {
-    return(
-        <Icon 
-            name='menu' 
-            size={24}
-            color='white'
-            onPress={() =>
-                props.navigation.toggleDrawer()}
-        />
-    );
-}
+
+
+const AboutUsNavigator = createStackNavigator();
 
 function AboutUsNavigatorScreen(){
     return(
@@ -259,6 +294,20 @@ function MainNavigatorDrawer() {
                             name='address-card'
                             type='font-awesome'
                             size={22}
+                            color={tintColor}
+                        />
+                    )
+                }}                
+            />
+             <MainNavigator.Screen 
+                name="Favorites" 
+                component={FavoritesNavigatorScreen}
+                options={{
+                    drawerIcon: ({tintColor}) => (
+                        <Icon
+                            name='heart'
+                            type='font-awesome'
+                            size={24}
                             color={tintColor}
                         />
                     )
