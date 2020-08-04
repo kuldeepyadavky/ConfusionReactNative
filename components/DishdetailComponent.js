@@ -201,7 +201,6 @@ class Dishdetail extends Component {
         );
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Dishdetail);
 
 
 const styles = StyleSheet.create({
@@ -227,3 +226,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     }
 })
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dishdetail);
