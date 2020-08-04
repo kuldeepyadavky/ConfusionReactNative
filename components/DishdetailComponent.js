@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList,Modal, StyleSheet } from 'react-native';
 import { Card, Icon, Rating, Input, Button } from 'react-native-elements';
-import { DISHES } from '../shared/dishes';
-import { COMMENTS } from '../shared/comments';
 import { postFavorite, postComment } from '../redux/ActionCreators';
+import * as Animatable from 'react-native-animatable';
 
 
 import { connect } from 'react-redux';
@@ -32,6 +31,7 @@ function RenderComments(props) {
     const renderCommentItem = ({item, index}) => {
         
         return (
+            
             <View key={index} style={{margin: 10}}>
                 <Text style={{fontSize: 14}}>{item.comment}</Text>
                 <Rating 
@@ -46,13 +46,19 @@ function RenderComments(props) {
     };
     
     return (
-        <Card title='Comments' >
-        <FlatList 
-            data={comments}
-            renderItem={renderCommentItem}
-            keyExtractor={(item) => item.id.toString()}
-            />
-        </Card>
+        <Animatable.View 
+        animation="fadeInUp"
+        duration={2000}
+        delay={1000}
+        >
+            <Card title='Comments' >
+            <FlatList 
+                data={comments}
+                renderItem={renderCommentItem}
+                keyExtractor={(item) => item.id.toString()}
+                />
+            </Card>
+        </Animatable.View>
     );
 }
 
@@ -62,6 +68,11 @@ function RenderDish(props) {
     
         if (dish != null) {
             return(
+                <Animatable.View 
+                animation="fadeInDown"
+                duration={2000}
+                delay={1000}
+                >
                 <Card
             featuredTitle={dish.name}
             image={{uri: baseUrl + dish.image}}>
@@ -87,6 +98,7 @@ function RenderDish(props) {
                     />
                 </View> 
             </Card>
+            </Animatable.View>
             );
         }
         else {
