@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import { Text, View, ScrollView, FlatList,Modal, StyleSheet, Alert, Button, PanResponder } from 'react-native';
 import { Card, Icon, Rating, Input} from 'react-native-elements';
 import { postFavorite, postComment } from '../redux/ActionCreators';
@@ -65,6 +65,8 @@ function RenderComments(props) {
 function RenderDish(props) {
 
     const dish = props.dish;
+    
+    const viewRef = useRef(null);
 
     const recognizeDrag = ({moveX, moveY, dx, dy}) => {
         if(dx < -200)
@@ -73,9 +75,14 @@ function RenderDish(props) {
             return false;
     };
 
+
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (e, gestureState) => {
             return true;
+        },
+        onPanResponderGrant: ()=> {
+            viewRef.current.rubberBand(1000)
+            .then(endState => console.log(endState.finished ? 'finished' : 'cancelled'))
         },
         onPanResponderEnd: (e, gestureState) => {
             if (recognizeDrag(gestureState))
@@ -108,6 +115,7 @@ function RenderDish(props) {
                 animation="fadeInDown"
                 duration={2000}
                 delay={1000}
+                ref={viewRef}
                 {...panResponder.panHandlers}
                 >
                 <Card
