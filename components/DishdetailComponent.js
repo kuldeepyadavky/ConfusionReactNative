@@ -75,6 +75,13 @@ function RenderDish(props) {
             return false;
     };
 
+    const recognizeComment = ({ moveX, moveY, dx, dy }) => {
+        if (dx > 200)
+          return true;
+        else
+          return false;
+      };
+
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (e, gestureState) => {
@@ -105,6 +112,9 @@ function RenderDish(props) {
                     { cancelable: false }
                                       
                     )
+                    else if (recognizeComment(gestureState)) {
+                        props.toggleModal()
+                      }
             return true;
         }
     });
@@ -119,8 +129,8 @@ function RenderDish(props) {
                 {...panResponder.panHandlers}
                 >
                 <Card
-            featuredTitle={dish.name}
-            image={{uri: baseUrl + dish.image}}>
+                featuredTitle={dish.name}
+                image={{uri: baseUrl + dish.image}}>
                 <Text style={{margin: 10}}>
                     {dish.description}
                 </Text>
@@ -206,6 +216,7 @@ class Dishdetail extends Component {
                 <RenderDish dish={this.props.dishes.dishes[+dishId]}
                     favorite={this.props.favorites.some(el => el === dishId)}
                     onPress={() => this.markFavorite(dishId)} 
+                    toggleModal={() => this.toggleModal()}
                     />
                 <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />
                 <Modal animationType = {"slide"} transparent = {false}
