@@ -6,6 +6,7 @@ import Moment from 'moment';
 import * as Animatable from 'react-native-animatable';
 import { Notifications } from 'expo';
 import * as  Permissions from 'expo-permissions';
+import * as Calendar from 'expo-calendar';
 
 class Reservation extends Component {
 
@@ -42,7 +43,9 @@ class Reservation extends Component {
                         text: 'OK',
                         onPress: () => {
                             this.presentLocalNotifications(this.state.date);
-                            this.resetForm()
+                            this.addReservationToCalendar(this.state.date);
+                            Alert.alert('Your reservation has been added to calendar');
+                            this.resetForm();
                         }
                  },
                  {
@@ -65,7 +68,7 @@ class Reservation extends Component {
         }
         
         async obtainNotificationPermission() {
-            let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS)
+            let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS);
             if (permission.status !== 'granted'){
                 permission = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
                 if(permission.status !== 'granted'){
@@ -73,6 +76,28 @@ class Reservation extends Component {
                 }
             }
             return permission;
+        }
+
+        async obtainCalendarPermission() {
+            let calendarPermission = await Permissions.getAsync(Permissions.CALENDAR);
+            if (calendarPermission.status !== 'granted') {
+                calendarPermission = await Permissions.askAsync(Permissions.CALENDAR);
+                if (calendarPermission.status !== 'granted') {
+                    Alert.alert('Permission not granted to access calendar');
+                }
+            }
+            return calendarPermission;
+        }
+    
+        async addReservationToCalendar(date) {
+            await this.obtainCalendarPermission();
+            Calendar.createEventAsync(Calendar.DEFAULT, {
+                title: 'Con Fusion Table Reservation',
+                startDate: new Date(Date.parse(date)),
+                endDate: new Date(Date.parse(date)).getTime() + 7200000,
+                timeZone: 'Asia/Hong_Kong',
+                location: '121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong'
+            });
         }
 
         async presentLocalNotifications(date){

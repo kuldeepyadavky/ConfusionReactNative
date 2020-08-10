@@ -10,8 +10,6 @@ import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator'
 
 
-
-
 class LoginTab extends Component {
 
     constructor(props) {
@@ -165,6 +163,22 @@ class RegisterTab extends Component{
         this.setState({ imageUrl: processedImage.uri })
     }
 
+    getImageFromGallery = async () => {
+		const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+		const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        console.log('gallery')
+		if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
+			let capturedImage = await ImagePicker.launchImageLibraryAsync({
+				allowsEditing: true,
+				aspect: [ 4, 3 ]
+			});
+
+			if (!capturedImage.cancelled) {
+				this.processImage(capturedImage.uri);
+			}
+		}
+	};
+
     static navigationOptions = {
         title: 'Register',
         tabBarIcon: ({tintColor}) => (
@@ -197,6 +211,13 @@ class RegisterTab extends Component{
                     title='Camera'
                     onPress={this.getImageFromCamera} 
                 />
+         =
+                <Button buttonStyle={styles.cameraButton}
+                title="Camera" 
+                onPress={this.getImageFromCamera} />
+                <Button buttonStyle={styles.cameraButton} 
+                title="Gallery" 
+                onPress={this.getImageFromGallery} />
             </View>
             <View style={styles.container}>
                 <Input
@@ -334,7 +355,11 @@ const styles = StyleSheet.create({
     },
     formButton: {
         margin: 60
-    }
+    },
+    cameraButton: {
+		backgroundColor: '#512DA8',
+		margin: 15
+	}
 });
 
 export default Login; 
